@@ -1,0 +1,176 @@
+<div id="flex">
+  <div class="filter">
+    <div ngbDropdown>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      >
+        Filter for month
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button
+          *ngFor="let month of months; index as i; first as isFirst"
+          ngbDropdownItem
+          (click)="getEventsOfMonth(month.value)"
+        >
+          {{ month.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="calEntries" class="flex-cards">
+    <div
+      class="card"
+      *ngFor="let calEntry of calEntries; index as i; first as isFirst"
+    >
+      <div class="card-body">
+        <div class="wrapper">
+          <div class="title">
+            <h1 class="card-title">
+              {{ calEntry.startDate | date: 'dd' }}
+            </h1>
+          </div>
+          <div class="one">
+            <h2>
+              {{ calEntry.startDate | date: 'EEEE' }}
+            </h2>
+            <h2>
+              {{ calEntry.startDate | date: 'MMMM, YYYY' }}
+            </h2>
+          </div>
+        </div>
+
+        <h2 class="card-subtitle">
+          {{ calEntry.title }}
+        </h2>
+        <div
+          *ngIf="
+            calEntry.startDate != calEntry.endDate;
+            then thenBlock;
+            else elseBlock
+          "
+        ></div>
+        <ng-template #elseBlock>
+          <div class="box">
+            <p class="push">
+              <strong>Start Time: </strong>{{ calEntry.startTime }}
+            </p>
+            <p><strong>End Time: </strong>{{ calEntry.endTime }}</p>
+          </div>
+        </ng-template>
+
+        <!-- only show end date if the event lasts longer than one day -->
+        <ng-template #thenBlock>
+          <div>
+            <div class="box">
+              <p class="push">
+                <strong>Start Time: </strong>{{ calEntry.startTime }}
+              </p>
+              <p><strong>End Time: </strong>{{ calEntry.endTime }}</p>
+            </div>
+            <p>
+              <strong>End Date: </strong
+              >{{ calEntry.endDate | date: 'EEEE, dd. MMMM yyyy' }}
+            </p>
+          </div>
+        </ng-template>
+
+        <h3>Location</h3>
+        <p>{{ calEntry.location }}</p>
+
+        <ngb-accordion #acc="ngbAccordion">
+          <ngb-panel>
+            <ng-template ngbPanelTitle>
+              <b>Description</b>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              {{ calEntry.description }}
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+
+        <div *ngIf="user?.isAdmin">
+          <ngb-accordion #acc="ngbAccordion">
+            <ngb-panel>
+              <ng-template ngbPanelTitle>
+                <b>Registrations</b>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    Registrations total: {{ calEntry.numOfRegistrations }}
+                  </li>
+                  <li class="list-group-item">
+                    Registrations English: {{ calEntry.requestsEnglish }}
+                  </li>
+                  <li class="list-group-item">
+                    Registrations German: {{ calEntry.requestsGerman }}
+                  </li>
+                </ul>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </div>
+      </div>
+
+      <button
+        *ngIf="user?.isAdmin"
+        class="btn primary"
+        type="button"
+        routerLink="../admin/lab-events/{{ calEntry._id }}"
+      >
+        Edit Event
+      </button>
+
+      <div id="Registration">
+        <h4>
+          Registration
+          <svg
+            placement="top"
+            ngbTooltip="If you want to participate in this
+            event please click the button below, depending on the language.
+            You do not need to enter your personal data."
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-info-circle"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+            />
+            <path
+              d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+            />
+          </svg>
+        </h4>
+        <p *ngIf="checkRegistrations(calEntry._id)">
+          You have registered for this event!
+        </p>
+        <div class="flex">
+          <button
+            [disabled]="checkRegistrations(calEntry._id)"
+            class="btn primary"
+            type="button"
+            (click)="registerEnglish(calEntry._id, 'eng', user?._id)"
+          >
+            Register for English
+          </button>
+
+          <button
+            [disabled]="checkRegistrations(calEntry._id)"
+            class="btn primary"
+            type="button"
+            (click)="registerGerman(calEntry._id, 'de', user?._id)"
+          >
+            Register for German
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

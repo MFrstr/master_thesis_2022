@@ -1,0 +1,93 @@
+a {
+  text-decoration: none;
+  color: #141200;
+}
+
+a:hover {
+  color: #fedf00;
+}
+
+.card {
+  width: 32%;
+  margin: 2em 2em;
+  border: transparent;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.card-title {
+  font-size: 5em;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.card-body {
+  color: #141200 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px 25px 20px;
+}
+
+.card-subtitle {
+  margin-bottom: 1em;
+}
+
+.one {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  font-weight: 500;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  flex: start;
+}
+
+.push {
+  margin-right: 30px;
+}
+
+.accordion {
+  width: 90%;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #e7ebef;
+  --bs-accordion-active-bg: none;
+  --bs-accordion-color: #141200;
+  --bs-accordion-active-color: #141200;
+  --bs-accordion-btn-focus-border-color: #fedf00;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-border-color: none;
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-padding-y: 10px;
+  --bs-accordion-btn-padding-x: 0;
+}
+
+.wrapper {
+  display: flex;
+  margin-bottom: 1.5em;
+}
+
+.wrapper div {
+  justify-content: center;
+}
+
+button.btn {
+  width: fit-content;
+  margin: 0 auto 2em auto;
+}
+
+.linkList {
+  display: flex;
+  position: absolute;
+  top: 1em;
+  right: 2.5em;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.list-group {
+  --bs-list-group-bg: none;
+}

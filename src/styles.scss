@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+// @use '@angular/material' as mat;
+@import '~bootstrap/dist/css/bootstrap.css';
+
+// $custom-typography: mat.define-typography-config(
+//   $font-family: 'Exo',
+// );
+
+// @include mat.core($custom-typography);
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px !important;
+}
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px !important;
+}
+h3 {
+  font-size: 1em;
+  margin-bottom: 10px !important;
+}
+h5 {
+  margin-bottom: 10px !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: bold;
+}
+p {
+  font-size: 16px;
+  margin-bottom: 1.5em !important;
+}
+
+.mat-snack-bar-container {
+  background-color: #fff;
+  border: 1px solid #fedf00;
+  position: absolute;
+  top: 3em;
+  right: 0;
+  min-width: fit-content;
+  max-width: fit-content;
+}
+
+.mat-simple-snackbar-action button {
+  min-width: 40px !important;
+}
+
+.mat-snack-bar-container button {
+  font-size: 10pt;
+}
+
+.mat-snack-bar-container .mat-button {
+  padding: 0;
+}
+
+button.primary {
+  font-weight: bold;
+  background-color: #fedf00 !important;
+}
+
+// button for delete options
+button.light {
+  font-weight: bold;
+  background-color: #f9fafb !important;
+}
+
+button.light:hover {
+  background-color: #e7ebef !important;
+}
+
+button.primary:hover {
+  color: #fedf00;
+  border: 1px solid #fedf00;
+  background-color: #fff !important;
+}
+
+button.primary:active {
+  color: #141200;
+  border: 1px solid #141200;
+  background-color: #fedf00;
+}

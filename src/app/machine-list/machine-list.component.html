@@ -1,0 +1,86 @@
+<div id="flex">
+  <div class="filter">
+    <div>
+      <button
+        class="btn btn-outline-dark"
+        type="button"
+        (click)="getAllMachines()"
+      >
+        Show All Maschines
+      </button>
+    </div>
+
+    <div ngbDropdown>
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        id="dropdownBasic1"
+        ngbDropdownToggle
+      >
+        Filter machine category
+      </button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button
+          *ngFor="let cat of machineCategories; index as i; first as isFirst"
+          ngbDropdownItem
+          (click)="filterMachines(cat)"
+        >
+          {{ cat }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="machines" class="flex-cards">
+    <div
+      class="card"
+      *ngFor="let machine of machines; index as i; first as isFirst"
+    >
+      <div class="card-body">
+        <div class="wrapper">
+          <div class="title">
+            <h1 class="card-title">
+              {{ machine.name }}
+            </h1>
+          </div>
+          <h3>Category</h3>
+          <p>{{ machine.category }}</p>
+          <h3>Description</h3>
+          <p>{{ machine.description }}</p>
+          <!-- only show headline for materials if a machine entry has material objects stored -->
+          <div *ngIf="machine.materialList.materials.length > 0">
+            <ngb-accordion #acc="ngbAccordion">
+              <ngb-panel>
+                <ng-template ngbPanelTitle>
+                  <b>Materials to use</b>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <ul class="list-group">
+                    <li
+                      *ngFor="
+                        let material of machine.materialList.materials;
+                        index as i;
+                        first as isFirst
+                      "
+                      class="list-group-item"
+                    >
+                      {{ material.materialName }}
+                    </li>
+                  </ul>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+          </div>
+        </div>
+      </div>
+      <button
+        *ngIf="user?.isAdmin"
+        class="btn primary"
+        type="button"
+        routerLink="../admin/machines/{{ machine._id }}"
+      >
+        Edit Machine
+      </button>
+    </div>
+  </div>
+</div>

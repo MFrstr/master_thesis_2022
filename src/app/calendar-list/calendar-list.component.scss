@@ -1,0 +1,104 @@
+#flex {
+  margin: 2em 2em;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.filter {
+  display: flex;
+}
+
+.flex-cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.card {
+  width: 35%;
+  height: fit-content;
+  margin: 0 2em 2em 0;
+  border: transparent;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.card-title {
+  font-size: 5em;
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.card-body {
+  color: #141200 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px 25px 20px;
+}
+
+.card-subtitle {
+  margin-bottom: 1em;
+}
+
+.one {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  font-weight: 500;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  flex: start;
+}
+
+.push {
+  margin-right: 30px;
+}
+
+.accordion {
+  display: block;
+  width: 90%;
+  margin-bottom: 1.5em;
+  border-bottom: 1px solid #e7ebef;
+  --bs-accordion-active-bg: none;
+  --bs-accordion-color: #141200;
+  --bs-accordion-active-color: #141200;
+  --bs-accordion-btn-focus-border-color: #fedf00;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-border-color: none;
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-padding-y: 10px;
+  --bs-accordion-btn-padding-x: 0;
+}
+
+.wrapper {
+  display: flex;
+  margin-bottom: 3em;
+}
+
+.wrapper div {
+  justify-content: center;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+button.btn {
+  width: fit-content;
+  margin: 0 0 2em 1.5em;
+}
+
+#Registration {
+  padding: 0 20px 25px 20px;
+}
+
+#Registration button.btn {
+  margin: 0;
+}

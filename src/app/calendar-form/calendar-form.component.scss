@@ -1,0 +1,60 @@
+.card {
+  width: 35%;
+  margin: 0 auto 2em auto;
+  border: transparent;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.card-title {
+  margin-bottom: 0.5em !important;
+}
+
+.card-body {
+  color: #141200 !important;
+  margin: 0 1em 0 1em;
+  padding: 1em 0.5em;
+}
+
+.card p {
+  font-size: 1em;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.push {
+  margin-left: auto;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+textarea {
+  margin-bottom: 1.5em;
+}
+
+#Confirm {
+  display: none;
+  margin: 0 1em 1em 1em;
+  padding: 1em 0.5em;
+}
+
+/* Style Timepicker*/
+ngb-timepicker {
+  border: none !important;
+}
+
+small {
+  color: grey;
+  margin-bottom: 15px;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1px solid #a94442; /* red */
+}

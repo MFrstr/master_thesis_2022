@@ -1,0 +1,68 @@
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.card {
+  width: fit-content;
+  margin: 2em;
+  border: transparent;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.card-title {
+  font-weight: bold;
+  margin-bottom: 0.7em;
+  text-align: center;
+}
+
+.card-subtitle {
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.card-body {
+  color: #141200 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 20px 25px 20px;
+}
+
+.event {
+  margin-top: 2em;
+}
+
+form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-control {
+  width: fit-content;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  margin-bottom: 1.5em;
+}
+
+button.btn.primary {
+  margin: 0 auto 2em 0;
+}
+
+.alert-secondary {
+  --bs-alert-color: #141200;
+  --bs-alert-bg: #fffdeb;
+}
+
+input.ng-touched.ng-invalid {
+  border: 1px solid #a94442;
+}

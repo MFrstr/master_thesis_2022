@@ -1,0 +1,132 @@
+<button type="button" class="btn light" (click)="goBack()">Back</button>
+
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="calEntryFormIsNew; then thenBlock; else elseBlock"></div>
+    <ng-template #elseBlock>
+      <h1 class="card-title">Edit Event</h1>
+    </ng-template>
+    <ng-template #thenBlock>
+      <h1 class="card-title">Create New Event</h1>
+    </ng-template>
+    <small>Fields with * are required.</small>
+    <form id="CalEntry" [formGroup]="calEntryForm">
+      <div class="flex">
+        <div class="form-group">
+          <label>Start Date*</label>
+          <input
+            formControlName="startDate"
+            class="form-control"
+            type="date"
+            placeholder="Date"
+            required
+          />
+        </div>
+        <div class="form-group push">
+          <div class="form-group">
+            <label>End Date*</label>
+            <input
+              formControlName="endDate"
+              class="form-control"
+              type="date"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex">
+        <div class="form-group">
+          <label>Start Time*</label>
+          <ngb-timepicker
+            [minuteStep]="mstep"
+            id="startTimePicker"
+            type="time"
+            formControlName="startTime"
+            class="form-control"
+            required
+          ></ngb-timepicker>
+        </div>
+        <div class="form-group push">
+          <label>End Time*</label>
+          <ngb-timepicker
+            [minuteStep]="mstep"
+            id="startTimePicker"
+            type="time"
+            formControlName="endTime"
+            class="form-control"
+            required
+          ></ngb-timepicker>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Title*</label>
+        <input
+          formControlName="title"
+          class="form-control"
+          type="text"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label>Description*</label>
+        <textarea formControlName="description" class="form-control" rows="4">
+        </textarea>
+      </div>
+      <div class="form-group">
+        <label>Location*</label>
+        <input
+          formControlName="location"
+          class="form-control"
+          type="text"
+          required
+        />
+      </div>
+
+      <div class="alert alert-danger" *ngIf="formIsInvalid">
+        Your data is invalid. Please check your input.
+      </div>
+      <div class="flex">
+        <button class="btn primary" type="button" (click)="calEntrySubmitted()">
+          Submit Event
+        </button>
+
+        <button
+          *ngIf="!calEntryFormIsNew"
+          id="Delete"
+          class="btn light"
+          type="button"
+          (click)="confirmDeletion()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-trash-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+            />
+          </svg>
+          <i class="bi bi-trash-fill"></i>
+          Event
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Confirm Dialog -->
+  <div id="Confirm">
+    <h3>Confirmation</h3>
+    <p>Do you really want to delete the event?</p>
+    <div class="flex">
+      <button class="btn primary" type="button" (click)="confirmNo()">
+        No, keep editing.
+      </button>
+      <button class="btn light" type="button" (click)="deleteCalEntry()">
+        Yes, delete event!
+      </button>
+    </div>
+  </div>
+</div>

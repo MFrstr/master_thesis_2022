@@ -1,0 +1,97 @@
+<div class="container">
+  <h2>Welcome to the management platform of the Fab Lab Siegen</h2>
+
+  <h3>Events for today!</h3>
+
+  <div *ngIf="calEntries" style="display: flex">
+    <div
+      class="card"
+      *ngFor="let calEntry of calEntries; index as i; first as isFirst"
+    >
+      <div class="card-body">
+        <div class="wrapper">
+          <div class="title">
+            <h1 class="card-title">
+              {{ calEntry.startDate | date: 'dd' }}
+            </h1>
+          </div>
+          <div class="one">
+            <h2>
+              {{ calEntry.startDate | date: 'EEEE' }}
+            </h2>
+            <h2>
+              {{ calEntry.startDate | date: 'MMMM, YYYY' }}
+            </h2>
+          </div>
+        </div>
+
+        <h2 class="card-subtitle">
+          {{ calEntry.title }}
+        </h2>
+        <div
+          *ngIf="
+            calEntry.startDate != calEntry.endDate;
+            then thenBlock;
+            else elseBlock
+          "
+        ></div>
+        <ng-template #elseBlock>
+          <div class="box">
+            <p class="push">
+              <strong>Start Time: </strong>{{ calEntry.startTime }}
+            </p>
+            <p><strong>End Time: </strong>{{ calEntry.endTime }}</p>
+          </div>
+        </ng-template>
+
+        <!-- only show end date if the event lasts longer than one day -->
+        <ng-template #thenBlock>
+          <div>
+            <div class="box">
+              <p class="push">
+                <strong>Start Time: </strong>{{ calEntry.startTime }}
+              </p>
+              <p><strong>End Time: </strong>{{ calEntry.endTime }}</p>
+            </div>
+            <p>
+              <strong>End Date: </strong
+              >{{ calEntry.endDate | date: 'EEEE, dd. MMMM yyyy' }}
+            </p>
+          </div>
+        </ng-template>
+
+        <h3>Location</h3>
+        <p>{{ calEntry.location }}</p>
+
+        <ngb-accordion #acc="ngbAccordion">
+          <ngb-panel>
+            <ng-template ngbPanelTitle>
+              <b>Description</b>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              {{ calEntry.description }}
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <button
+        *ngIf="user?.isAdmin"
+        class="btn primary"
+        type="button"
+        routerLink="../admin/lab-events/{{ calEntry._id }}"
+      >
+        Edit Event
+      </button>
+    </div>
+  </div>
+
+  <div class="linkList">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <a href="https://fablab-siegen.de/" target="_blank">
+          Fab Lab Homepage
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

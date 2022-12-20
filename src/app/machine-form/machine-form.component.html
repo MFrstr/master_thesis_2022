@@ -1,0 +1,148 @@
+<button type="button" class="btn light" (click)="goBack()">Back</button>
+
+<div class="card">
+  <div class="card-body">
+    <div *ngIf="machineFormIsNew; then thenBlock; else elseBlock"></div>
+    <ng-template #elseBlock>
+      <h1 class="card-title">Edit Machine</h1>
+    </ng-template>
+    <ng-template #thenBlock>
+      <h1 class="card-title">Create New Machine</h1>
+    </ng-template>
+    <small>Fields with * are required</small>
+    <form id="Machine" [formGroup]="machineForm">
+      <div>
+        <div class="form-group">
+          <label>Name Machine*</label>
+          <input
+            formControlName="name"
+            class="form-control"
+            type="text"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Category*</label>
+          <select
+            id="category-{{ i }}"
+            formControlName="category"
+            class="form-control form-select"
+            type="text"
+          >
+            <option *ngFor="let cat of machineCategories" value="{{ cat }}">
+              {{ cat }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description*</label>
+          <input
+            formControlName="description"
+            class="form-control"
+            type="textarea"
+            required
+          />
+        </div>
+        <h2>Material for this Machine</h2>
+        <div formArrayName="materialList">
+          <div formArrayName="materials">
+            <div
+              *ngFor="let material of materials.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div class="materials-row">
+                <label>Name Material*</label>
+                <div class="flex">
+                  <input
+                    id="name-{{ i }}"
+                    formControlName="materialName"
+                    class="form-control"
+                    type="text"
+                    required
+                  />
+
+                  <!-- Button delete this material -->
+                  <button
+                    class="btn light"
+                    type="button"
+                    (click)="deleteMaterial(i)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-trash-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                      />
+                    </svg>
+                    <i class="bi bi-trash-fill"></i>
+                    Material
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex" style="margin-bottom: 20px">
+        <button class="btn primary" type="button" (click)="addMaterial()">
+          Add New Material
+        </button>
+      </div>
+
+      <hr />
+      <div class="alert alert-danger" *ngIf="formIsInvalid">
+        Your data is invalid. Please check your input.
+      </div>
+      <div class="flex">
+        <button
+          class="btn primary send"
+          type="button"
+          (click)="machineSubmitted()"
+        >
+          Submit Machine
+        </button>
+
+        <!-- Button delete Machine -->
+        <button
+          *ngIf="!machineFormIsNew"
+          class="btn light"
+          type="button"
+          (click)="confirmDeletion()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-trash-fill"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+            />
+          </svg>
+          <i class="bi bi-trash-fill"></i>
+          Machine
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- Confirm Dialog -->
+  <div id="Confirm">
+    <h3>Confirmation</h3>
+    <p>Do you really want to delete the event?</p>
+    <div class="flex">
+      <button class="btn primary" type="button" (click)="confirmNo()">
+        No, keep editing.
+      </button>
+      <button class="btn light" type="button" (click)="deleteMachine()">
+        Yes, delete machine!
+      </button>
+    </div>
+  </div>
+</div>

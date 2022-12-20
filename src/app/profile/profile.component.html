@@ -1,0 +1,97 @@
+<div id="wrapper">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title">Howdy {{ user.fullname }}!</h1>
+      <form id="user" [formGroup]="userForm" (ngSubmit)="changeProfile()">
+        <div class="form-group">
+          <label>Name</label>
+          <input
+            formControlName="fullname"
+            class="form-control"
+            type="text"
+            required
+          />
+          <p
+            *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)"
+            style="color: #a94442; margin: 0"
+          >
+            Name must start with at least 2 letters
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <br />
+          <input
+            formControlName="email"
+            placeholder="word@mail.end"
+            type="email"
+            class="form-control"
+            required
+          />
+          <p
+            *ngIf="email.invalid && (email.dirty || email.touched)"
+            style="color: #a94442; margin: 0"
+          >
+            Please enter a valid email address
+          </p>
+        </div>
+
+        <button class="btn primary" type="submit" [disabled]="!userForm.valid">
+          Update Data
+        </button>
+        <p>
+          <strong>Last Safety Instruction on</strong>
+          {{ user.safetyInstruction | date: 'EEEE, dd. MMMM yyyy' }}
+        </p>
+        <div class="alert alert-secondary" role="alert">
+          The safety instruction must be repeated after one year <br />
+          if you want to continue using machines in the Fab Lab.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="registeredEvents.length > 0" class="card">
+    <div class="card-body">
+      <h1 class="card-title">Events</h1>
+      <h2 class="card-subtitle">Your registrations</h2>
+      <div
+        class="event"
+        *ngFor="let event of registeredEvents; index as i; first as isFirst"
+      >
+        <h5>{{ event.title }} on {{ event.startDate | date }}</h5>
+        <p>
+          You have registered for: {{ checkLanguageOfRegistration(event._id) }}
+        </p>
+
+        <div
+          *ngIf="
+            checkLanguageOfRegistration(event._id) == 'english';
+            then thenBlock;
+            else elseBlock
+          "
+        ></div>
+        <ng-template #thenBlock>
+          <button
+            class="btn light"
+            type="button"
+            (click)="unregister(event._id, 'eng')"
+          >
+            Unregister from event
+          </button>
+        </ng-template>
+        <ng-template #elseBlock>
+          <button
+            class="btn light"
+            type="button"
+            (click)="unregister(event._id, 'de')"
+          >
+            Unregister event
+          </button>
+        </ng-template>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>
