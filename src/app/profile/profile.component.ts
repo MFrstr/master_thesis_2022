@@ -36,7 +36,7 @@ export class ProfileComponent implements OnInit {
   userForm = this.fb.group({
     fullname: new FormControl('', [
       Validators.required,
-      Validators.pattern('[a-z]{2,}.{0,}'), // min 2 letters
+      Validators.pattern('[a-zA-Z]{2,}.{0,}'), // min 2 letters
     ]),
     email: new FormControl('', [
       Validators.required,
